@@ -1,34 +1,17 @@
 # v-a-compontents
 
-## Project setup
-```
-npm install
-```
+## Install
 
-### Compiles and hot-reloads for development
+```shell
+$ npm install --save v-a-compontents
 ```
-npm run serve
-```
+## Quick Start
 
-### Compiles and minifies for production
-```
-npm run build
-```
+```javascript
+import Vue from "vue";
+import VAC from "v-a-compontents";
 
-### Run your tests
+Vue.use(VAC);
 ```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## LICENSE
+[MIT](LICENSE)

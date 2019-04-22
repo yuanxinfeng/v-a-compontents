@@ -1,7 +1,8 @@
 {
   "name": "v-a-compontents",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "private": false,
+  "main": "lib/v-a-compontents.common.js",
   "description": "A Component Library for Vue.js.",
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -12,6 +13,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "echarts": "^4.2.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {

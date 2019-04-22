@@ -7,7 +7,7 @@ import {
   cancelAnimationFrame
 } from "./requestAnimationFrame.js";
 export default {
-  name: "VCountUp",
+  name: "VACountUp",
   props: {
     startVal: {
       type: Number,
