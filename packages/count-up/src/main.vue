@@ -17,7 +17,7 @@ export default {
     endVal: {
       type: Number,
       required: false,
-      default: 2017
+      default: 2019
     },
     duration: {
       type: Number,
