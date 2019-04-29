@@ -1,7 +1,8 @@
 <template>
   <div class="hello">
     <v-a-count-up :startVal="0" :endVal="10000"></v-a-count-up>
-    <v-a-verify-code></v-a-verify-code>
+    <input type="text" v-model="currentCode">
+    <v-a-verify-code :currentCode="currentCode"></v-a-verify-code>
     <v-a-charts :setOption="option1"></v-a-charts>
     <v-a-charts :setOption="option2"></v-a-charts>
     <v-a-charts :setOption="option3"></v-a-charts>
@@ -18,7 +19,8 @@ export default {
     return {
       option1: option1,
       option2: option2,
-      option3: option3
+      option3: option3,
+      currentCode:""
     };
   }
 };

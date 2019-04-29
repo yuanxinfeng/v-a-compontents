@@ -1,6 +1,6 @@
 {
   "name": "v-a-compontents",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "private": false,
   "main": "lib/v-a-compontents.common.js",
   "description": "A Component Library for Vue.js.",

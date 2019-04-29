@@ -3,6 +3,7 @@ node_modules
 /lib/*.umd.js
 /lib/*.umd.*.js
 /tests
+/docs
 /src
 vue.config.js
 babel.config.js

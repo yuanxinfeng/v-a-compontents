@@ -34,13 +34,31 @@
 这是一个验证码的组件，采用canvas编写 从1-0-a-z
 :::
 在需要的页面直接引用
-```html
-    <v-a-verify-code></v-a-verify-code>
+```html        
+    <input v-model="inputCode" placeholder="请输入验证码" />
+
+    <v-a-verify-code ref="you name" :currentCode="you code"></v-a-verify-code>
 ```
-|    Property    |    type    |   default   |   required |
-| -------------- |:----------:|:-----------:|:----------:|
-|  contentWidth  |    Number  |     110     |   false    |
-|  contentHeight |    Number  |     40      |   false    |
+```js
+<script>
+  name: "name",
+  props: {
+    msg: String
+  },
+  data() {
+    let verifyCode = this.$refs.[you name].checkCode
+    return {
+      inputCode: ''
+    };
+  }
+</script>
+```
+|    Property    |    type    |   default   |   required |     Description    |
+| -------------- |:----------:|:-----------:|:----------:|:------------------:|
+|  contentWidth  |    Number  |     110     |   false    |  the contentWidth  |
+|  contentHeight |    Number  |     40      |   false    |  the contentHeight |
+|  currentCode   |    String  |             |   true     |   the currentCode  |
+|  autoCode      |   Boolean  |    false    |   false    | it is auto change code|
 
 
 ## v-charts

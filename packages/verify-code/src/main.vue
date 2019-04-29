@@ -1,10 +1,5 @@
 <template>
-  <canvas
-    :width="contentWidth"
-    :height="contentHeight"
-    @click="createCode"
-    :id="id"
-  />
+  <canvas :width="contentWidth" :height="contentHeight" @click="createCode" :id="id"/>
 </template>
 <script>
 export default {
@@ -19,6 +14,14 @@ export default {
           ((Math.random() * 1000).toFixed(0) + "")
         );
       }
+    },
+    currentCode: {
+      type: String,
+      required: true
+    },
+     autoCode: {
+      type: Boolean,
+      required: false
     },
     fontSizeMin: {
       type: Number,
@@ -71,16 +74,20 @@ export default {
   },
   data() {
     return {
-      code: {
-        checkCode: "",
-        inputCode: ""
-      }
+      checkCode: ""
     };
   },
   created() {
     this.$nextTick(() => {
       this.createCode();
     });
+  },
+  watch: {
+    currentCode: function(val) {
+      if (this.autoCode && val.length === 4 && val.toUpperCase() !== this.checkCode.toUpperCase()) {
+        this.createCode();
+      }
+    }
   },
   methods: {
     // 图片验证码
@@ -130,7 +137,7 @@ export default {
         let index = Math.floor(Math.random() * 36); //取得随机数的索引（0~35）
         code += random[index]; //根据索引取得随机数加到code上
       }
-      this.code.checkCode = code; //把code值赋给验证码
+      this.checkCode = code; //把code值赋给验证码
       this.drawPic();
     },
     // 生成一个随机数
@@ -155,8 +162,8 @@ export default {
       );
       ctx.fillRect(0, 0, this.contentWidth, this.contentHeight);
       // 绘制文字
-      for (let i = 0; i < this.code.checkCode.length; i++) {
-        this.drawText(ctx, this.code.checkCode[i], i);
+      for (let i = 0; i < this.checkCode.length; i++) {
+        this.drawText(ctx, this.checkCode[i], i);
       }
       this.drawLine(ctx);
       this.drawDot(ctx);
@@ -165,7 +172,7 @@ export default {
       ctx.fillStyle = this.randomColor(this.colorMin, this.colorMax);
       ctx.font =
         this.randomNum(this.fontSizeMin, this.fontSizeMax) + "px SimHei";
-      let x = (i + 1) * (this.contentWidth / (this.code.checkCode.length + 1));
+      let x = (i + 1) * (this.contentWidth / (this.checkCode.length + 1));
       let y = this.randomNum(this.fontSizeMax, this.contentHeight - 5);
       let deg = this.randomNum(-45, 45);
       // 修改坐标原点和旋转角度
