@@ -2,9 +2,10 @@
 import CountUp from "./count-up/index";
 import VerifyCode from "./verify-code/index";
 import VCharts from "./v-charts/index";
+import TMap from "./Tmap/index";
 
 // 以数组的结构保存组件，便于遍历
-const components = [CountUp, VerifyCode, VCharts];
+const components = [CountUp, VerifyCode, VCharts, TMap];
 
 // 定义 install 方法
 const install = function(Vue) {

@@ -6,6 +6,10 @@
     <v-a-charts :setOption="option1"></v-a-charts>
     <v-a-charts :setOption="option2"></v-a-charts>
     <v-a-charts :setOption="option3"></v-a-charts>
+    <button @click="dialog = true">clickMap</button>
+    <div v-if="dialog">
+      <v-t-map :super_this="super_this" ref="map" :jingd="location.lng" :weid="location.lat" v-on:getlocation="getlocation"></v-t-map>
+    </div>
   </div>
 </template>
 
@@ -17,11 +21,24 @@ export default {
   },
   data() {
     return {
+      dialog: false,
+      super_this: this,
       option1: option1,
       option2: option2,
       option3: option3,
-      currentCode:""
+      currentCode: "",
+      location:{
+        lat:"",
+        lng:""
+      }
     };
+  },
+  methods: {
+    getlocation(location) {
+      console.log(location);
+      this.location = location;
+      this.dialog = false;
+    }
   }
 };
 const option1 = {
