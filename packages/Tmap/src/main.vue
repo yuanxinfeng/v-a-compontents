@@ -64,6 +64,15 @@ export default {
       //回显经度
       type: String / Number,
       required: false
+    },
+    //自定义图层链接
+    url: {
+      type: String / Number,
+      required: false
+    },
+    imageURL: {
+      type: String / Number,
+      required: false
     }
   },
   name: "VTMap",
@@ -100,9 +109,13 @@ export default {
             "http://www.sdmap.gov.cn/tileservice/SdRasterPubMap?" +
             "SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=sdimg&STYLE=default&TILEMATRIXSET=img2014" +
             "&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&FORMAT=image%2Fpng&tk=fd6f828f8dd89245d136cfeb9e4e8501";
-          //创建自定义图层对象
-          let lay = new T.TileLayer(imageURL, { minZoom: 1, maxZoom: 18 });
-          let lay2 = new T.TileLayer(url, { minZoom: 2, maxZoom: 18 });
+        
+          // this.getBase64(imageURL).then(base64 => {
+          //   console.log(base64);
+          // })
+          // 创建自定义图层对象
+          let lay = new T.TileLayer(this.imageURL, { minZoom: 1, maxZoom: 18 });
+          let lay2 = new T.TileLayer(this.url, { minZoom: 2, maxZoom: 18 });
           let config = { layers: [lay, lay2], projection: "EPSG:4326" };
           this.map = new T.Map(this.super_this.$refs.map.$refs.mapDiv, config); // 初始化地图对象
           // 设置显示地图的中心点和级别
@@ -143,6 +156,31 @@ export default {
           console.log(error);
         });
     },
+    getBase64(img) {
+      let image = new Image();
+      image.crossOrigin = "";
+      image.src = img;
+      let _this = this;
+      return new Promise(function(resolve, reject) {
+        if (img) {
+          // image.onload = function() {
+            let dataURL = _this.getBase64Image(image)
+            resolve(dataURL); //将base64传给done上传处理
+          // };
+        }
+      });
+    },
+    getBase64Image(img, width, height) {
+        //width、height调用时传入具体像素值，控制大小 ,不传则默认图像大小
+        var canvas = document.createElement("canvas");
+        canvas.width = width ? width : img.width;
+        canvas.height = height ? height : img.height;
+
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        var dataURL = canvas.toDataURL();
+        return dataURL;
+      },
     initLonlat() {
       let marker = new T.Marker(new T.LngLat(this.jingd, this.weid)); //创建标注对象
       this.map.addOverLay(marker); //向地图上添加标注
